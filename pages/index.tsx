@@ -1,116 +1,171 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Link from "next/link";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#F5EDE4] to-[#EFE5DA]">
-      <div className="container mx-auto px-4 py-12">
-        {/* Navigation */}
-        <nav className="flex justify-between items-center mb-12">
-          <h1 className="text-2xl font-bold text-[#3A2E2E]">
-            MediNotes Pro
-          </h1>
-          <div>
+    <main className="min-h-screen bg-gradient-to-br from-[#F6F2EE] via-[#F2ECE6] to-[#ECE3DA] text-[#1B1917]">
+      {/* soft radial background glows */}
+      <div className="pointer-events-none fixed -top-24 -left-24 h-80 w-80 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(250,245,239,.85),transparent_60%)] blur-2xl" />
+      <div className="pointer-events-none fixed -bottom-24 -right-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(240,232,224,.8),transparent_60%)] blur-2xl" />
+
+      <div className="container mx-auto max-w-6xl px-4 py-10">
+        {/* Nav */}
+        <nav className="mb-12 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-serif text-lg tracking-tight">
+            <span className="inline-block h-2 w-2 rounded-full bg-[#1B1917]" />
+            AIMed Notes
+          </div>
+
+          <div className="flex items-center gap-4">
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="bg-[#C8A27B] hover:bg-[#B08968] text-white font-medium py-2 px-6 rounded-lg transition-colors">
+                <button className="rounded-xl bg-[#1B1917] px-5 py-2 text-sm font-medium text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
                   Sign In
                 </button>
               </SignInButton>
             </SignedOut>
+
             <SignedIn>
-              <div className="flex items-center gap-4">
-                <Link 
-                  href="/product" 
-                  className="bg-[#C8A27B] hover:bg-[#B08968] text-white font-medium py-2 px-6 rounded-lg transition-colors"
-                >
-                  Go to App
-                </Link>
-                <UserButton showName={true} />
-              </div>
+              <Link
+                href="/product"
+                className="rounded-xl bg-[#1B1917] px-5 py-2 text-sm font-medium text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              >
+                Go to App
+              </Link>
+              <UserButton showName />
             </SignedIn>
           </div>
         </nav>
 
-        {/* Hero Section */}
-        <div className="text-center py-16">
-          <h2 className="text-6xl font-bold bg-gradient-to-r from-[#B08968] to-[#8C6B4F] bg-clip-text text-transparent mb-6">
-            Transform Your
-            <br />
-            Consultation Notes
-          </h2>
-          <p className="text-xl text-[#6B5E55] mb-12 max-w-2xl mx-auto">
-            AI-powered assistant that generates professional summaries, action items, and patient communications from your consultation notes
-          </p>
+        {/* Hero */}
+        <section className="grid items-center gap-10 md:grid-cols-2">
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#E8E0D6] bg-[#FFFCF8] px-3 py-1 text-xs tracking-wide text-[#6E6359]">
+              ✨ Minimal look, maximal clarity
+            </p>
+            <h1 className="mt-5 font-serif text-6xl font-semibold leading-[1.05] tracking-tight text-[#1B1917] md:text-7xl">
+              Bring the Calm
+              <br />
+              To Your Notes
+            </h1>
+            <p className="mt-5 max-w-xl text-lg text-[#6E6359]">
+              An elegant, AI-assisted workspace that turns messy consult notes
+              into clean summaries, action plans, and patient-friendly emails.
+            </p>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
-            {/* Feature 1 */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#C8A27B] to-[#B08968] rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-              <div className="relative bg-[#FDF8F4] p-6 rounded-xl shadow-lg border border-[#E8DCC9] backdrop-blur-sm">
-                <div className="text-3xl mb-4">📋</div>
-                <h3 className="text-lg font-semibold mb-2 text-[#3A2E2E]">
-                  Professional Summaries
-                </h3>
-                <p className="text-[#6B5E55] text-sm">
-                  Generate comprehensive medical record summaries from your notes
-                </p>
-              </div>
-            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="rounded-xl bg-[#1B1917] px-6 py-3 text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+                    Start Free Trial
+                  </button>
+                </SignInButton>
+              </SignedOut>
+              <SignedIn>
+                <Link href="/product">
+                  <button className="rounded-xl bg-[#1B1917] px-6 py-3 text-white shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+                    Open Consultation Assistant
+                  </button>
+                </Link>
+              </SignedIn>
 
-            {/* Feature 2 */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#D1B694] to-[#C8A27B] rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-              <div className="relative bg-[#FDF8F4] p-6 rounded-xl shadow-lg border border-[#E8DCC9] backdrop-blur-sm">
-                <div className="text-3xl mb-4">✅</div>
-                <h3 className="text-lg font-semibold mb-2 text-[#3A2E2E]">
-                  Action Items
-                </h3>
-                <p className="text-[#6B5E55] text-sm">
-                  Clear next steps and follow-up actions for every consultation
-                </p>
-              </div>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#B08968] to-[#8C6B4F] rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
-              <div className="relative bg-[#FDF8F4] p-6 rounded-xl shadow-lg border border-[#E8DCC9] backdrop-blur-sm">
-                <div className="text-3xl mb-4">📧</div>
-                <h3 className="text-lg font-semibold mb-2 text-[#3A2E2E]">
-                  Patient Emails
-                </h3>
-                <p className="text-[#6B5E55] text-sm">
-                  Draft clear, patient-friendly email communications automatically
-                </p>
-              </div>
+              <span className="text-sm text-[#6E6359]">No credit card needed 🔒</span>
             </div>
           </div>
-          
-          {/* CTA */}
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button className="bg-gradient-to-r from-[#C8A27B] to-[#B08968] hover:from-[#B08968] hover:to-[#8C6B4F] text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
-                Start Free Trial
-              </button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <Link href="/product">
-              <button className="bg-gradient-to-r from-[#C8A27B] to-[#B08968] hover:from-[#B08968] hover:to-[#8C6B4F] text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
-                Open Consultation Assistant
-              </button>
-            </Link>
-          </SignedIn>
-        </div>
 
-        {/* Trust Indicators */}
-        <div className="text-center text-sm text-[#6B5E55] mt-8">
-          <p>HIPAA Compliant • Secure • Professional</p>
-        </div>
+          {/* Feature Cards */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                emoji: "📋",
+                title: "Professional Summaries",
+                body: "Auto-organized A/P with bullet clarity.",
+                glowFrom: "#e6dfd6",
+                glowTo: "#f6f1ea",
+              },
+              {
+                emoji: "✅",
+                title: "Action Items",
+                body: "Crystal-clear follow-ups for every visit.",
+                glowFrom: "#e9e0d6",
+                glowTo: "#f7f2ec",
+              },
+              {
+                emoji: "📧",
+                title: "Patient Emails",
+                body: "Plain-language drafts in one click.",
+                glowFrom: "#e7ded4",
+                glowTo: "#f6efe8",
+              },
+              {
+                emoji: "🧩",
+                title: "Markdown-Ready",
+                body: "Supports **bold**, lists, and tables.",
+                glowFrom: "#eadfd4",
+                glowTo: "#f8f2eb",
+              },
+            ].map((f, i) => (
+              <div key={i} className="relative group">
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-30 blur transition group-hover:opacity-50"
+                  style={{
+                    background: `linear-gradient(135deg, ${f.glowFrom}, ${f.glowTo})`,
+                  }}
+                />
+                <div className="relative rounded-2xl border border-[#E8E0D6] bg-[#FFFCF8] p-5 shadow-sm transition hover:shadow-md">
+                  <div className="text-2xl">{f.emoji}</div>
+                  <h3 className="mt-2 font-semibold">{f.title}</h3>
+                  <p className="mt-1 text-sm text-[#6E6359]">{f.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Social Proof / Trust */}
+        <section className="mt-14 rounded-2xl border border-[#E8E0D6] bg-[#FFFCF8] p-6 text-center shadow-[0_10px_30px_rgba(34,26,20,0.07)]">
+          <p className="text-sm text-[#6E6359]">
+            HIPAA-friendly • Secure by design • Built for clinicians
+          </p>
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-sm">
+            <span className="rounded-full border border-[#E8E0D6] bg-white px-3 py-1">
+              ⏱️ Saves 10–15 mins per visit
+            </span>
+            <span className="rounded-full border border-[#E8E0D6] bg-white px-3 py-1">
+              🧠 Consistent documentation
+            </span>
+            <span className="rounded-full border border-[#E8E0D6] bg-white px-3 py-1">
+              🎨 Calm, distraction-free UI
+            </span>
+          </div>
+        </section>
+
+        {/* Mini FAQ */}
+        <section className="mx-auto mt-12 max-w-4xl">
+          <h2 className="font-serif text-3xl">Quick FAQs</h2>
+          <div className="mt-4 space-y-3">
+            <details className="rounded-xl border border-[#E8E0D6] bg-[#FFFCF8] p-4">
+              <summary className="cursor-pointer">Can I paste old notes? 🧾</summary>
+              <p className="mt-2 text-sm text-[#6E6359]">
+                Yes. Paste raw text and the system will structure it into a clean
+                summary you can copy to your EMR.
+              </p>
+            </details>
+            <details className="rounded-xl border border-[#E8E0D6] bg-[#FFFCF8] p-4">
+              <summary className="cursor-pointer">Does it support Markdown? ✍️</summary>
+              <p className="mt-2 text-sm text-[#6E6359]">
+                Absolutely—use **bold**, lists, and tables to emphasize key items.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-14 border-t border-[#E8E0D6] pt-6 text-center text-sm text-[#6E6359]">
+          Made with care 🫶 — soft neutrals, clean type, gentle motion.
+        </footer>
       </div>
     </main>
   );
